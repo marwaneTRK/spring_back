@@ -61,4 +61,18 @@ public class EmployeService {
         }
         return ResponseEntity.notFound().build();
     }
+    public ResponseEntity<?> getEmplpyeeWorkHours(Long employeeId) {
+        Optional<Employee> employeeOptional = employeeRepository.findById(employeeId);
+        if (employeeOptional.isPresent()) {
+            return ResponseEntity.ok(employeeRepository.sumWorkHoursByEmployeeId(employeeOptional.get().getId()));
+        }
+        return ResponseEntity.notFound().build();
+    }
+    public ResponseEntity<?> getAbsentEmployees (){
+        List<Employee> employees = employeeRepository.findEmployeesWithZeroWorkHours();
+        if(employees.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(employees);
+    }
 }

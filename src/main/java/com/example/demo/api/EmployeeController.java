@@ -41,4 +41,12 @@ public class EmployeeController {
     public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long employeeId, @RequestBody Employee employee) {
         return employeeService.updateEmployee(employeeId,employee);
     }
+    @GetMapping("/emplpyees/{id}/workhours")
+    public ResponseEntity<?> getEmployeeByWorkHours(@PathVariable("id") Long employeeId) {
+        return employeeService.getEmplpyeeWorkHours(employeeId);
+    }
+    @GetMapping("/employees/absent")
+    public ResponseEntity<?> getEmployeeAbsent() {
+        return employeeService.getAbsentEmployees();
+    }
 }
